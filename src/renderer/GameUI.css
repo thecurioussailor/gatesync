@@ -1,0 +1,189 @@
+/* ── Root overlay container ────────────────────────────────────────────────── */
+
+.ui-root {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    font-family: 'Courier New', 'Consolas', monospace;
+    color: #e3f2fd;
+    user-select: none;
+  }
+  
+  /* ── HUD ────────────────────────────────────────────────────────────────────── */
+  
+  .hud {
+    position: absolute;
+    top: 20px;
+    left: 24px;
+    display: flex;
+    gap: 32px;
+  }
+  
+  .hud-block {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  
+  .hud-label {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: #5c8ab0;
+    font-weight: 600;
+  }
+  
+  .hud-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e3f2fd;
+    line-height: 1;
+  }
+  
+  .hud-value.combo {
+    color: #ffd54f;
+  }
+  
+  /* ── Held color label ────────────────────────────────────────────────────────── */
+  
+  .held-label {
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    font-weight: 700;
+    opacity: 0.7;
+  }
+  
+  .held-label[data-color='blue']   { color: #4fc3f7; }
+  .held-label[data-color='yellow'] { color: #ffd54f; }
+  .held-label[data-color='red']    { color: #ef5350; }
+  
+  /* ── Overlay (menu / pause / gameover) ──────────────────────────────────────── */
+  
+  .overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(5, 10, 20, 0.72);
+    backdrop-filter: blur(2px);
+  }
+  
+  .overlay-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+    padding: 40px 48px;
+    border: 1px solid rgba(21, 101, 192, 0.5);
+    border-radius: 12px;
+    background: rgba(5, 10, 30, 0.85);
+    box-shadow: 0 0 40px rgba(21, 101, 192, 0.2);
+    text-align: center;
+  }
+  
+  /* ── Menu ───────────────────────────────────────────────────────────────────── */
+  
+  .game-title {
+    font-size: 52px;
+    font-weight: 900;
+    letter-spacing: 0.08em;
+    color: #e3f2fd;
+    margin: 0;
+    line-height: 1;
+  }
+  
+  .game-title span {
+    color: #4fc3f7;
+  }
+  
+  .subtitle {
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    color: #5c8ab0;
+    margin: 0;
+  }
+  
+  .controls-hint {
+    display: flex;
+    gap: 20px;
+    font-size: 12px;
+    color: #7aa8c8;
+    margin-top: 4px;
+  }
+  
+  /* ── Pause ───────────────────────────────────────────────────────────────────── */
+  
+  .pause-title {
+    font-size: 36px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    color: #4fc3f7;
+    margin: 0;
+  }
+  
+  /* ── Game over ───────────────────────────────────────────────────────────────── */
+  
+  .gameover-title {
+    font-size: 42px;
+    font-weight: 900;
+    letter-spacing: 0.1em;
+    color: #ef5350;
+    margin: 0;
+  }
+  
+  .score-row {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    width: 100%;
+    justify-content: space-between;
+  }
+  
+  .score-label {
+    font-size: 13px;
+    letter-spacing: 0.14em;
+    color: #5c8ab0;
+  }
+  
+  .score-val {
+    font-size: 32px;
+    font-weight: 700;
+    color: #e3f2fd;
+  }
+  
+  .score-val.best {
+    color: #ffd54f;
+  }
+  
+  /* ── Shared: press to start / resume ─────────────────────────────────────────── */
+  
+  .press-start {
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: #4a7a9b;
+    margin: 8px 0 0;
+    animation: pulse 2s ease-in-out infinite;
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50%       { opacity: 1; }
+  }
+  
+  /* ── kbd styling ─────────────────────────────────────────────────────────────── */
+  
+  kbd {
+    display: inline-block;
+    padding: 2px 7px;
+    border: 1px solid rgba(79, 195, 247, 0.4);
+    border-radius: 4px;
+    background: rgba(79, 195, 247, 0.08);
+    color: #4fc3f7;
+    font-family: inherit;
+    font-size: 11px;
+    margin: 0 2px;
+  }

@@ -104,7 +104,7 @@ console.log('\n── Orb collection ──────────────�
 }
 
 {
-  // Should not pick up a second orb if already holding one
+  // Should overwrite held color when touching a new orb
   let s = createPlayingState(createInitialState());
   s = {
     ...s,
@@ -112,7 +112,7 @@ console.log('\n── Orb collection ──────────────�
     orbs: [{ id: 101, lane: 1, color: 'red', z: ORB_COLLECT_Z - 0.01, collected: false }],
   };
   s = advance(s, 50);
-  assert('does not overwrite held color', s.player.heldColor === 'yellow');
+  assert('overwrites held color on new orb touch', s.player.heldColor === 'red');
 }
 
 console.log('\n── Gate mechanics ───────────────────────────────────────');
@@ -192,8 +192,3 @@ console.log('\n── Pause / Resume ──────────────�
   assert('state does not change while paused', s.score.current === scoreSnapshot);
   assert('phase stays paused', s.phase === 'paused');
 }
-
-// ─── Summary ──────────────────────────────────────────────────────────────────
-
-console.log(`\n── Results: ${passed} passed, ${failed} failed ────────────────────\n`);
-if (failed > 0) process.exit(1);

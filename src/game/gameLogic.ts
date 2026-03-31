@@ -1,7 +1,6 @@
 import type { GameState, Lane, OrbColor, Orb, Gate } from './types';
 import {
     ORB_COLORS,
-    ORB_COLLECT_Z,
     ORB_MISS_Z,
     GATE_TRIGGER_Z,
     GATE_REMOVE_Z,
@@ -21,7 +20,7 @@ import {
 export function createInitialState(): GameState {
     return {
         phase: 'menu',
-        player: { lane: 1, heldColor: null},
+        player: { lane: 1, heldColor: randomColor()},
         orbs: [],
         gate: null,
         score: {
@@ -71,19 +70,16 @@ export function update(state: GameState, dtMs: number): GameState {
 
     orbs = orbs.map(orb => {
         if(
-            !orb.collected && orb.z >= ORB_COLLECT_Z && orb.lane === player.lane
+            !orb.collected && (orb.z * orb.z * (3 - 2 * orb.z)) >= 0.78 && orb.lane === player.lane
         ) {
-            //Pick up only if not already holding something
-            if(player.heldColor === null) {
-                player = { ...player, heldColor: orb.color};
-                collectionEvents.push(orb.color);
-                return { ...orb, collected: true};
-            }
+            player = { ...player, heldColor: orb.color};
+            collectionEvents.push(orb.color);
+            return { ...orb, collected: true};
         }
         return orb;
     });
 
-    //Remove orbs that have flown past (missed or already collected)
+    //Remove orbs that have flown past (missed) or already collected
     orbs = orbs.filter(orb => orb.z < ORB_MISS_Z && !orb.collected);
 
     // ── Spawn new orbs on interval ─────────────────────────────────────────────
@@ -110,7 +106,6 @@ export function update(state: GameState, dtMs: number): GameState {
         if(player.heldColor === gate.requiredColor) {
             //Correct color - open gate, award points
             gate = { ...gate, state: 'opening'};
-            player = { ...player, heldColor: null};
 
             const newCombo = Math.min(score.combo + 1, COMBO_MULTIPLIER_CAP);
             const points = POINTS_PER_GATE * newCombo;

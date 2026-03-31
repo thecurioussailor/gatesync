@@ -6,7 +6,7 @@ export const ORB_COLORS: import('./types').OrbColor[] = ['blue', 'yellow', 'red'
 // ─── Z-axis thresholds (0 = far horizon, 1 = player feet) ────────────────────
 
 /** Orb is collected when it reaches this z value and player is on same lane */
-export const ORB_COLLECT_Z = 0.92;
+export const ORB_COLLECT_Z = 0.72;
 
 /** Orbs past this z without being collected are simply removed (missed) */
 export const ORB_MISS_Z = 1.05;
